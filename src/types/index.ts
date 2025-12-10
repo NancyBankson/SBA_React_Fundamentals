@@ -24,10 +24,13 @@ export interface TaskItemProps {
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDelete: (taskId: string) => void;
 }
-// types/index.ts
-export interface TaskFilterProps {
-  onFilterChange: (filters: {
+
+export interface TaskFilter {
     status?: TaskStatus;
     priority?: TaskPriority;
-  }) => void;
+}
+
+// types/index.ts
+export interface TaskFilterProps {
+  onFilterChange: (filters: TaskFilter) => void;
 }
