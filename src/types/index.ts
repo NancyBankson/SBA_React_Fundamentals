@@ -1,14 +1,11 @@
 // types/index.ts
 export type TaskStatus = 'All' | 'Pending' | 'In Progress' | 'Completed';
-
-export type TaskPriority = 'All' | 'Low' | 'Medium' | 'High'
  
 export interface Task {
   id: string;
   title: string;
   description: string;
   status: TaskStatus;
-  priority: TaskPriority;
   dueDate: string;
 }
  
@@ -25,12 +22,12 @@ export interface TaskItemProps {
   onDelete: (taskId: string) => void;
 }
 
-export interface TaskFilters {
-    status?: TaskStatus;
-    priority?: TaskPriority;
-}
-
 // types/index.ts
 export interface TaskFilterProps {
-  onFilterChange: (filters: TaskFilters) => void;
+  onFilterChange: (status: TaskStatus) => void;
+}
+
+export interface TaskFormProps {
+  task: Task;
+  onSubmit: (task: Task) => void;
 }
