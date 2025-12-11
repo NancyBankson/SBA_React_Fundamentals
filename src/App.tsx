@@ -1,56 +1,16 @@
 import { useState } from 'react'
-import { useEffect } from 'react'
-import type { Task, TaskPriority } from './types'
+import type { Task } from './types'
 import type { TaskStatus } from './types'
 import { TaskList } from './components/TaskList/TaskList'
 import './App.css'
 import type { TaskListProps } from './types'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
+import type { TaskFilters } from './types'
+import { mockTasks } from './types/mockTasks'
 
 function App() {
-  const [tasks, settasks] = useState([
-    {
-      id: "1",
-      title: "Buy groceries",
-      description: "Get milk, bread, bananas",
-      status: "Pending",
-      priority: "Low",
-      dueDate: "12/16/2025"
-    },
-    {
-      id: "2",
-      title: "Earn education",
-      description: "Practice, practice, practice",
-      status: "In Progress",
-      priority: "High",
-      dueDate: "05/08/2026"
-    },
-    {
-      id: "3",
-      title: "Win Nobel Prize",
-      description: "Discover something great",
-      status: "In Progress",
-      priority: "Medium",
-      dueDate: "05/08/2036"
-    }
-  ])
-  const [filteredTasks, setfilteredTasks] = useState<Task[]>([]);
-
-  const [filters, setfilters] = useState<TaskFilter>({
-    status: [],
-    priority: []
-  })
-
-  const sortAndFilterTasks = (filterObj: TaskFilter) => {
-      return tasks.filter(task => {
-        return (filterObj.status.length > 0 ? filterObj.status.includes(task.status) : true) && (filterObj.priority.length > 0 ? filterObj.priority.includes(task.priority) : true)
-      })
-  }
-
-  useEffect(() => {
-    const task = sortAndFilterTasks(filters);
-    setfilteredTasks(tasks);
-  }, [filters, tasks])
+  const [tasks, setTasks] = useState(mockTasks);
+  const [filteredTasks, setFilteredTasks] = useState(mockTasks);
 
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
@@ -58,18 +18,39 @@ function App() {
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
           return { ...task, status: newStatus };
-        } 
+        }
         return task;
       });
-      settasks(updatedTasks);
+      setTasks(updatedTasks);
     },
     onDelete: (taskId: string) => {
       const updatedTasks = tasks.filter((task) => task.id !== taskId);
-      settasks(updatedTasks);
+      setTasks(updatedTasks);
     }
   }
-  
-//  const originalTasks = [...tasks];
+
+  //  Change logic to if then statements, if value is all, then set tasks to initial data
+  function onFilterChange(filters: TaskFilters) {
+    const FilterTasks = tasks.filter(task => {
+      console.log(filters.status);
+      console.log(filters.priority);
+      if (filters.status) {
+        if ((filters.status === "All") && ((filters.priority === "All") || (!filters.priority))) {
+          return task;
+        } else if (filters.priority === "All") {
+          return (filters.status === task.status);
+        } else if (filters.status === "All") {
+          return (filters.priority === task.priority);
+        } else return ((filters.status === task.status) && (filters.priority === task.priority));
+      } else return 
+    })
+    setFilteredTasks(FilterTasks);
+  }
+
+ 
+
+
+  //  const originalTasks = [...tasks];
 
   // const [originalTasks, setorigi]
 
@@ -85,9 +66,8 @@ function App() {
 
   return (
     <>
-      <TaskFilter 
-        filters={filters}
-        setFilters={setfilters}
+      <TaskFilter
+        onFilterChange={onFilterChange}
       />
       <TaskList
         tasks={filteredTasks}
