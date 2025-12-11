@@ -40,3 +40,22 @@
 .read-the-docs {
   color: #888;
 }
+
+.task-container {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+}
+.title-row {
+  display: flex;
+  align-items: center;
+}
+h1 {
+  font-size: 1.5rem;
+}
+.title-row select {
+  max-height: 30px;
+}
+.delete-text:hover {
+  color: red;
+}

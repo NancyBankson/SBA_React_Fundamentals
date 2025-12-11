@@ -7,7 +7,10 @@ import type { TaskPriority } from "../../types";
 export function TaskFilter({ onFilterChange }: TaskFilterProps) {
 
     //  This code caused an ifinite loop
-    // const [filters, setFilters] = useState<TaskFilters>({});
+    // const [filters, setFilters] = useState<TaskFilters>({
+    //     status: "All",
+    //     priority: "All"
+    // });
 
     // function handleFilterChange(event: React.ChangeEvent<HTMLSelectElement>) {
     //     if (event.target.id === "status-filter") {

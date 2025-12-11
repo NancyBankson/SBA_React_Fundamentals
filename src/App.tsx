@@ -15,6 +15,8 @@ function App() {
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
     onStatusChange: (taskId: string, newStatus: TaskStatus) => {
+      console.log(taskId);
+      console.log(newStatus);
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
           return { ...task, status: newStatus };
@@ -22,37 +24,18 @@ function App() {
         return task;
       });
       setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
     },
     onDelete: (taskId: string) => {
       const updatedTasks = tasks.filter((task) => task.id !== taskId);
-      setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
     }
   }
 
-  //  Change logic to if then statements, if value is all, then set tasks to initial data
-  // function onFilterChange(filters: TaskFilters) {
-  //   const FilterTasks = tasks.filter(task => {
-  //     console.log(filters.status);
-  //     console.log(filters.priority);
-  //     if (filters.status) {
-  //       if ((filters.status === "All") && ((filters.priority === "All") || (!filters.priority))) {
-  //         return task;
-  //       } else if (filters.priority === "All") {
-  //         return (filters.status === task.status);
-  //       } else if (filters.status === "All") {
-  //         return (filters.priority === task.priority);
-  //       } else return ((filters.status === task.status) && (filters.priority === task.priority));
-  //     } else return 
-  //   })
-  //   setFilteredTasks(FilterTasks);
-  // }
-
-
-  //  Change logic to if then statements, if value is all, then set tasks to initial data
   function onFilterChange(filters: TaskFilters) {
     const FilterTasks = tasks.filter(task => {
-      console.log(filters.status);
-      console.log(filters.priority);
+      // console.log(filters.status);
+      // console.log(filters.priority);
       if (filters.status) {
         if (filters.status === "All") {
           return task;
