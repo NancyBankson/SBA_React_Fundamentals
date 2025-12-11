@@ -1,9 +1,26 @@
+// import { useState } from "react";
 import type { TaskFilterProps } from "../../types";
+// import type { TaskFilters } from "../../types";
 import type { TaskStatus } from "../../types";
 import type { TaskPriority } from "../../types";
 
 export function TaskFilter({ onFilterChange }: TaskFilterProps) {
- 
+
+    //  This code caused an ifinite loop
+    // const [filters, setFilters] = useState<TaskFilters>({});
+
+    // function handleFilterChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    //     if (event.target.id === "status-filter") {
+    //         const targetFilter = event.target.value as TaskStatus;
+    //         setFilters({ ...filters, status: targetFilter });
+    //     }
+    //     if (event.target.id === "priority-filter") {
+    //         const targetFilter = event.target.value as TaskPriority;
+    //         setFilters({ ...filters, priority: targetFilter});
+    //     }
+    // }
+    // onFilterChange(filters);
+
     return (
         <>
             <div>
