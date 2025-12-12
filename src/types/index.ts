@@ -1,6 +1,6 @@
 // types/index.ts
 export type TaskStatus = 'All' | 'Pending' | 'In Progress' | 'Completed';
- 
+
 export interface Task {
   id: string;
   title: string;
@@ -8,7 +8,15 @@ export interface Task {
   status: TaskStatus;
   dueDate: string;
 }
- 
+
+export interface FormData {
+  id: string;
+  title: string;
+  description: string;
+  status: TaskStatus;
+  dueDate: string;
+}
+
 export interface TaskListProps {
   tasks: Task[];
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
@@ -28,6 +36,5 @@ export interface TaskFilterProps {
 }
 
 export interface TaskFormProps {
-  task: Task;
   onSubmit: (task: Task) => void;
 }

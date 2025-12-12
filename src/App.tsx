@@ -5,8 +5,9 @@ import { TaskList } from './components/TaskList/TaskList'
 import './App.css'
 import type { TaskListProps } from './types'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
-import type { TaskFilters } from './types'
+// import type { TaskFilters } from './types'
 import { mockTasks } from './types/mockTasks'
+import { TaskForm } from './components/TaskForm/TaskForm'
 
 function App() {
   const [tasks, setTasks] = useState(mockTasks);
@@ -32,44 +33,30 @@ function App() {
     }
   }
 
-  function onFilterChange(filters: TaskFilters) {
+  function onSubmit(task: Task) {
+    const updatedTasks=[...tasks, task];
+        setTasks(updatedTasks);
+        setFilteredTasks(updatedTasks);
+  }
+
+  function onFilterChange(status: TaskStatus) {
     const FilterTasks = tasks.filter(task => {
-      // console.log(filters.status);
-      // console.log(filters.priority);
-      if (filters.status) {
-        if (filters.status === "All") {
+      if (status) {
+        if (status === "All") {
           return task;
         } else {
-          return (filters.status === task.status);
-        }
-      }
-      if (filters.priority) {
-        if (filters.priority === "All") {
-          return task;
-        } else {
-          return (filters.priority === task.priority);
+          return (status === task.status);
         }
       }
     })
     setFilteredTasks(FilterTasks);
   }
 
-  //  const originalTasks = [...tasks];
-
-  // const [originalTasks, setorigi]
-
-  // function onStatusFilter(status: TaskStatus) {
-  //   const newTasks = originalTasks.filter(originalTask => originalTask.status === status);
-  //   settasks(newTasks);
-  // }
-
-  // function onPriorityFilter(priority: TaskPriority) {
-  //   const newTasks = tasks.filter(task => task.priority === priority);
-  //   settasks(newTasks);
-  // }
-
   return (
     <>
+      <TaskForm 
+      onSubmit={onSubmit}
+      />
       <TaskFilter
         onFilterChange={onFilterChange}
       />
