@@ -34,9 +34,12 @@ function App() {
   }
 
   function onSubmit(task: Task) {
-    const updatedTasks=[...tasks, task];
-        setTasks(updatedTasks);
-        setFilteredTasks(updatedTasks);
+    console.log(task);
+    console.log(tasks);
+    console.log("hi");
+      setTasks((prevTasks) => [...prevTasks, task]);
+   setFilteredTasks((prevTasks) => [...prevTasks, task]);
+
   }
 
   function onFilterChange(status: TaskStatus) {
@@ -54,6 +57,8 @@ function App() {
 
   return (
     <>
+      <img src="./public/jigglypuff.jpg" />
+      <h3>Jigglypuff says "don't grade me before Monday"</h3>
       <TaskForm 
       onSubmit={onSubmit}
       />
