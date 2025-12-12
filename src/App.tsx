@@ -5,7 +5,7 @@ import { TaskList } from './components/TaskList/TaskList'
 import './App.css'
 import type { TaskListProps } from './types'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
-// import type { TaskFilters } from './types'
+import type { TaskFilters } from './types'
 import { mockTasks } from './types/mockTasks'
 import { TaskForm } from './components/TaskForm/TaskForm'
 
@@ -42,13 +42,22 @@ function App() {
 
   }
 
-  function onFilterChange(status: TaskStatus) {
+  function onFilterChange(filters: TaskFilters) {
     const FilterTasks = tasks.filter(task => {
-      if (status) {
-        if (status === "All") {
+      // console.log(filters.status);
+      // console.log(filters.priority);
+      if (filters.status) {
+        if (filters.status === "All") {
           return task;
         } else {
-          return (status === task.status);
+          return (filters.status === task.status);
+        }
+      }
+      if (filters.priority) {
+        if (filters.priority === "All") {
+          return task;
+        } else {
+          return (filters.priority === task.priority);
         }
       }
     })
