@@ -58,7 +58,7 @@ function App() {
   return (
     <>
       <img src="./public/jigglypuff.jpg" />
-      <h3>Jigglypuff says "don't grade me before Monday"</h3>
+      <h3>Jigglypuff says "I'm still working on this one"</h3>
       <TaskForm 
       onSubmit={onSubmit}
       />
