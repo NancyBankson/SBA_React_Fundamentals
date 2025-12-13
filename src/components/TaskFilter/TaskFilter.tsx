@@ -4,7 +4,7 @@ import type { TaskFilterProps } from "../../types";
 import type { TaskStatus } from "../../types";
 import type { TaskPriority } from "../../types";
 
-export function TaskFilter({ onFilterChange }: TaskFilterProps) {
+export function TaskFilter({ onSearchChange, onFilterChange }: TaskFilterProps) {
     // const [filters, setFilters] = useState("");
     //  This code caused an ifinite loop
     // const [filters, setFilters] = useState<TaskFilters>({
@@ -20,8 +20,19 @@ export function TaskFilter({ onFilterChange }: TaskFilterProps) {
     // }
     // onFilterChange(filters);
 
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        let searchTerm = event.target.value;
+        onSearchChange(searchTerm);
+    }
+
     return (
         <>
+            <div>
+                <search>
+                    <label htmlFor="search-task">Search tasks</label>
+                    <input type="search" id="search-task" onChange={handleChange}/>
+                </search>
+            </div>
             <div>
                 <label>Status</label>
                 <select id="status-filter" defaultValue={"All"} onChange={(e) => onFilterChange({ status : (e.target.value as TaskStatus) || undefined})}>

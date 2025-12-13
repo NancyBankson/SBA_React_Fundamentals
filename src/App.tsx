@@ -10,27 +10,21 @@ import { TaskForm } from './components/TaskForm/TaskForm'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
-        let retrievedArray: Task[] = [];
-        const retrievedString: string | null = localStorage.getItem("taskArray");
-        console.log(retrievedString);
-        if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
-        console.log(retrievedArray);
-        return retrievedArray;
-    });
+    let retrievedArray: Task[] = [];
+    const retrievedString: string | null = localStorage.getItem("taskArray");
+    if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
+    return retrievedArray;
+  });
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(() => {
-        let retrievedArray: Task[] = [];
-        const retrievedString: string | null = localStorage.getItem("taskArray");
-        console.log(retrievedString);
-        if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
-        console.log(retrievedArray);
-        return retrievedArray;
-    });
+    let retrievedArray: Task[] = [];
+    const retrievedString: string | null = localStorage.getItem("taskArray");
+    if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
+    return retrievedArray;
+  });
 
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
     onStatusChange: (taskId: string, newStatus: TaskStatus) => {
-      // console.log(taskId);
-      // console.log(newStatus);
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
           return { ...task, status: newStatus };
@@ -47,15 +41,12 @@ function App() {
   }
 
   function onSubmit(task: Task) {
-      setTasks((prevTasks) => [...prevTasks, task]);
-   setFilteredTasks((prevTasks) => [...prevTasks, task]);
-
+    setTasks((prevTasks) => [...prevTasks, task]);
+    setFilteredTasks((prevTasks) => [...prevTasks, task]);
   }
 
   function onFilterChange(filters: TaskFilters) {
     const FilterTasks = tasks.filter(task => {
-      // console.log(filters.status);
-      // console.log(filters.priority);
       if (filters.status) {
         if (filters.status === "All") {
           return task;
@@ -73,15 +64,22 @@ function App() {
     })
     setFilteredTasks(FilterTasks);
   }
+  function onSearchChange(searchTerm: string) {
+    const FilterTasks = tasks.filter(task => task.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    setFilteredTasks(FilterTasks);
+  }
+
+
 
   return (
     <>
       <img src="/jigglypuff.jpg" />
       <h3>Jigglypuff says "I'm still working on this one"</h3>
-      <TaskForm 
+      <TaskForm
         onSubmit={onSubmit}
       />
       <TaskFilter
+        onSearchChange={onSearchChange}
         onFilterChange={onFilterChange}
       />
       <TaskList
@@ -92,5 +90,6 @@ function App() {
     </>
   )
 }
+
 
 export default App

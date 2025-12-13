@@ -35,6 +35,7 @@ export interface TaskItemProps {
 }
 
 export interface TaskFilterProps {
+  onSearchChange: (searchTerm: string) => void;
   onFilterChange: (filters: TaskFilters) => void;
 }
 
