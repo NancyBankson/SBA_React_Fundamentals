@@ -17,6 +17,7 @@ export interface FormData {
   title: string;
   description: string;
   status: TaskStatus;
+  priority: TaskPriority;
   dueDate: string;
 }
 

@@ -66,10 +66,10 @@ function App() {
 
   return (
     <>
-      <img src="./public/jigglypuff.jpg" />
+      <img src="/jigglypuff.jpg" />
       <h3>Jigglypuff says "I'm still working on this one"</h3>
       <TaskForm 
-      onSubmit={onSubmit}
+        onSubmit={onSubmit}
       />
       <TaskFilter
         onFilterChange={onFilterChange}

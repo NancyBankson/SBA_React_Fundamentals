@@ -1,18 +1,29 @@
 import { useState } from "react";
 // import type { Task } from "../../types";
 // import type { TaskStatus } from "../../types";
-import type { TaskFormProps } from "../../types";
-import type { FormData } from "../../types";
+// import type { TaskFormProps } from "../../types";
+import type { FormData, TaskFormProps } from "../../types";
+import type { Task } from "../../types";
+import { mockTasks } from "../../types/mockTasks";
 
-export function TaskForm({ onSubmit }: TaskFormProps) {
-
-
-    const SingleStateForm: React.FC = () => {
+let nextId = 1;
+export function TaskForm({onSubmit}: TaskFormProps) {
+// export const TaskForm: React.FC = () => {
+    // const [formData, setFormData] = useState<FormData>({
+    //     id: "5",
+    //     title: '',
+    //     description: '',
+    //     status: 'All',
+    //     priority: 'All',
+    //     dueDate: ''
+    // });
+    const [tasks, setTasks] = useState<Task[]>(mockTasks);
     const [formData, setFormData] = useState<FormData>({
         id: "5",
         title: '',
         description: '',
         status: 'All',
+        priority: 'All',
         dueDate: ''
     });
 
@@ -27,8 +38,9 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log(FormData);
+        console.log(tasks);
         onSubmit(formData);
-        // API call logic...
     };
 
 
@@ -36,19 +48,19 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
         <div className="task-container">
             <form onSubmit={handleSubmit}>
                 <label>Task title:</label>
-                <input id="title-input" type="text" name="title" value={FormData.title} onChange={handleChange} placeholder="Enter title"></input>
+                <input id="title-input" type="text" name="title" value={formData.title} onChange={handleChange} placeholder="Enter title"></input>
                 <label>Task description</label>
-                <input id="description-input" type="text" name="description" value={FormData.description} onChange={handleChange} placeholder="Enter description"></input>
-                <select id="status-input" name="status" value={FormData.status} onChange={handleChange}>
+                <input id="description-input" type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Enter description"></input>
+                <select id="status-input" name="status" value={formData.status} onChange={handleChange}>
                     <option value="Pending">Pending</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Completed">Completed</option>
                 </select>
                 <label>Due Date:</label>
-                <input id="date-input" type="date" name="dueDate" value={FormData.dueDate} onChange={handleChange} placeholder="MM/DD/YYYY" />
+                <input id="date-input" type="date" name="dueDate" value={formData.dueDate} onChange={handleChange} placeholder="MM/DD/YYYY" />
                 <button type="submit">Submit</button>
             </form>
         </div>
     )
 
-    }}
+    }
