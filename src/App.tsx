@@ -10,14 +10,14 @@ import { mockTasks } from './types/mockTasks'
 import { TaskForm } from './components/TaskForm/TaskForm'
 
 function App() {
-  const [tasks, setTasks] = useState(mockTasks);
-  const [filteredTasks, setFilteredTasks] = useState(mockTasks);
+  const [tasks, setTasks] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
     onStatusChange: (taskId: string, newStatus: TaskStatus) => {
-      console.log(taskId);
-      console.log(newStatus);
+      // console.log(taskId);
+      // console.log(newStatus);
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
           return { ...task, status: newStatus };
@@ -34,9 +34,6 @@ function App() {
   }
 
   function onSubmit(task: Task) {
-    console.log(task);
-    console.log(tasks);
-    console.log("hi");
       setTasks((prevTasks) => [...prevTasks, task]);
    setFilteredTasks((prevTasks) => [...prevTasks, task]);
 
