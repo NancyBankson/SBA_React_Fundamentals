@@ -8,8 +8,10 @@ import type { Task } from "../../types";
 export function TaskForm({ onSubmit }: TaskFormProps) {
     const [tasks, setTasks] = useState<Task[]>(() => {
         let retrievedArray: Task[] = [];
-        const retrievedString: string | null = localStorage.getItem("taskarray");
+        const retrievedString: string | null = localStorage.getItem("taskArray");
+        console.log(retrievedString);
         if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
+        console.log(retrievedArray);
         return retrievedArray;
     });
     const [id, setId] = useState(() => {
@@ -26,8 +28,8 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
         id: id.toString(),
         title: '',
         description: '',
-        status: 'All',
-        priority: 'All',
+        status: 'Pending',
+        priority: 'Low',
         dueDate: ''
     });
 
@@ -53,8 +55,8 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
             id: (id + 1).toString(),
             title: '',
             description: '',
-            status: 'All',
-            priority: 'All',
+            status: 'Pending',
+            priority: 'Low',
             dueDate: ''
         })
         onSubmit(formData);

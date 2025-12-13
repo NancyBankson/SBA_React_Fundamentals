@@ -25,7 +25,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
                 <p id={task.id} className="delete-text" onClick={handleDelete}>Delete</p>
             </div>
             <h2>{task.description}</h2>
-            <h3>Due: {task.dueDate}</h3>
+            <h3><span>Priority: {task.priority}</span>  Due: {task.dueDate}</h3>
         </div>
     )
 

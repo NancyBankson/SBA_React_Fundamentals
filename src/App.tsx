@@ -6,12 +6,25 @@ import './App.css'
 import type { TaskListProps } from './types'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
 import type { TaskFilters } from './types'
-import { mockTasks } from './types/mockTasks'
 import { TaskForm } from './components/TaskForm/TaskForm'
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+        let retrievedArray: Task[] = [];
+        const retrievedString: string | null = localStorage.getItem("taskArray");
+        console.log(retrievedString);
+        if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
+        console.log(retrievedArray);
+        return retrievedArray;
+    });
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>(() => {
+        let retrievedArray: Task[] = [];
+        const retrievedString: string | null = localStorage.getItem("taskArray");
+        console.log(retrievedString);
+        if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
+        console.log(retrievedArray);
+        return retrievedArray;
+    });
 
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
