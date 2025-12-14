@@ -4,24 +4,12 @@ import { useState } from "react";
 // import type { TaskFormProps } from "../../types";
 import type { FormData, TaskFormProps } from "../../types";
 import type { Task } from "../../types";
+import { RetrieveSavedTasks } from "../../utils/taskUtils";
+import { RetrieveId } from "../../utils/taskUtils";
 
 export function TaskForm({ onSubmit }: TaskFormProps) {
-    const [tasks, setTasks] = useState<Task[]>(() => {
-        let retrievedArray: Task[] = [];
-        const retrievedString: string | null = localStorage.getItem("taskArray");
-        if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
-        return retrievedArray;
-    });
-    const [id, setId] = useState(() => {
-        let retrievedId: string = "";
-        let retrievedIdArray: string | null = localStorage.getItem("savedId");
-        if (retrievedIdArray) { retrievedId = JSON.parse(retrievedIdArray) };
-        let nextId: number = 0;
-        if (retrievedId) {
-            nextId = parseInt(retrievedId[0]) + 1;            
-        } else nextId = 1;
-        return nextId;
-    })
+    const [tasks, setTasks] = useState<Task[]>(RetrieveSavedTasks);
+    const [id, setId] = useState(RetrieveId);
     const [formData, setFormData] = useState<FormData>({
         id: id.toString(),
         title: '',
@@ -42,7 +30,9 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        // Address problem: if tasks are deleted and new task is added via form, deleted tasks reappear
         let newTasks = [...tasks];
+        console.log(newTasks);
         let newId = [...formData.id];
         newTasks.push(formData);
         localStorage.setItem("taskArray", JSON.stringify(newTasks));

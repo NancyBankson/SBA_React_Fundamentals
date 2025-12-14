@@ -15,6 +15,7 @@ export function Dashboard() {
     const [lowPriority, setLowPriority] = useState(0);
     const [mediumPriority, setMediumPriority] = useState(0);
     const [highPriority, setHighPriority] = useState(0);
+    // Added if then statements to prevent infinite loop
     let pendingStats: Task[] = tasks.filter(task => task.status === "Pending");
     if (pendingStats.length != pendingStatus) {
         setPendingStatus(pendingStats.length);
@@ -42,25 +43,42 @@ export function Dashboard() {
 
     return (
         <div id="stats-container">
-            <div id="status-stats">
+            <div>
                 <h3>Tasks by Status</h3>
-                <label>Pending</label>
-                <p>{pendingStatus}</p>
-                <label>In Progress</label>
-                <p>{inProgressStatus}</p>
-                <label>Completed</label>
-                <p>{completedStatus}</p>
+                <div className="stats">
+                    <div className="stat">
+                        <label>Pending</label>
+                        <p>{pendingStatus}</p>
+                    </div>
+                    <div className="stat">
+                        <label>In Progress</label>
+                        <p>{inProgressStatus}</p>
+                    </div>
+                    <div className="stat">
+                        <label>Completed</label>
+                        <p>{completedStatus}</p>
+                    </div>
+                </div>
             </div>
-            <div id="priority-stats">
-                <h3>Tasks by Priority</h3>
-                <label>Low</label>
-                <p>{lowPriority}</p>
-                <label>Medium</label>
-                <p>{mediumPriority}</p>
-                <label>Low</label>
-                <p>{highPriority}</p>
+            <div>
+                <div>
+                    <h3>Tasks by Priority</h3>
+                    <div className="stats">
+                        <div className="stat">
+                            <label>Low</label>
+                            <p>{lowPriority}</p>
+                        </div>
+                        <div className="stat">
+                            <label>Medium</label>
+                            <p>{mediumPriority}</p>
+                        </div>
+                        <div className="stat">
+                            <label>Low</label>
+                            <p>{highPriority}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     )
 }

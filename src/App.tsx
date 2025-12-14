@@ -8,20 +8,11 @@ import { TaskFilter } from './components/TaskFilter/TaskFilter'
 import type { TaskFilters } from './types'
 import { TaskForm } from './components/TaskForm/TaskForm'
 import { Dashboard } from './components/Dashboard/Dashboard'
+import { RetrieveSavedTasks } from './utils/taskUtils'
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    let retrievedArray: Task[] = [];
-    const retrievedString: string | null = localStorage.getItem("taskArray");
-    if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
-    return retrievedArray;
-  });
-  const [filteredTasks, setFilteredTasks] = useState<Task[]>(() => {
-    let retrievedArray: Task[] = [];
-    const retrievedString: string | null = localStorage.getItem("taskArray");
-    if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
-    return retrievedArray;
-  });
+  const [tasks, setTasks] = useState<Task[]>(RetrieveSavedTasks);
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>(RetrieveSavedTasks);
 
   // Render list
   const newTasks: TaskListProps = {
@@ -33,12 +24,21 @@ function App() {
         }
         return task;
       });
+
+      let newTasks = [...updatedTasks];
+      localStorage.setItem("taskArray", JSON.stringify(newTasks));
       setTasks(updatedTasks);
       setFilteredTasks(updatedTasks);
+
     },
     onDelete: (taskId: string) => {
       const updatedTasks = tasks.filter((task) => task.id !== taskId);
+
+      let newTasks = [...updatedTasks];
+      localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      setTasks(updatedTasks);
       setFilteredTasks(updatedTasks);
+
     }
   }
 
