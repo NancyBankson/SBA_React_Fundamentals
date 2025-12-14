@@ -9,9 +9,7 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
     const [tasks, setTasks] = useState<Task[]>(() => {
         let retrievedArray: Task[] = [];
         const retrievedString: string | null = localStorage.getItem("taskArray");
-        console.log(retrievedString);
         if (retrievedString) { retrievedArray = JSON.parse(retrievedString) };
-        console.log(retrievedArray);
         return retrievedArray;
     });
     const [id, setId] = useState(() => {

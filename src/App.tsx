@@ -7,6 +7,7 @@ import type { TaskListProps } from './types'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
 import type { TaskFilters } from './types'
 import { TaskForm } from './components/TaskForm/TaskForm'
+import { Dashboard } from './components/Dashboard/Dashboard'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
@@ -22,6 +23,7 @@ function App() {
     return retrievedArray;
   });
 
+  // Render list
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
     onStatusChange: (taskId: string, newStatus: TaskStatus) => {
@@ -40,11 +42,13 @@ function App() {
     }
   }
 
+  // Add task form submit
   function onSubmit(task: Task) {
     setTasks((prevTasks) => [...prevTasks, task]);
     setFilteredTasks((prevTasks) => [...prevTasks, task]);
   }
 
+  // Filter status or priority
   function onFilterChange(filters: TaskFilters) {
     const FilterTasks = tasks.filter(task => {
       if (filters.status) {
@@ -64,17 +68,18 @@ function App() {
     })
     setFilteredTasks(FilterTasks);
   }
+
+  // Search bar
   function onSearchChange(searchTerm: string) {
     const FilterTasks = tasks.filter(task => task.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredTasks(FilterTasks);
   }
 
-
-
   return (
     <>
       <img src="/jigglypuff.jpg" />
       <h3>Jigglypuff says "I'm still working on this one"</h3>
+      <Dashboard />
       <TaskForm
         onSubmit={onSubmit}
       />

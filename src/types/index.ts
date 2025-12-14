@@ -1,4 +1,3 @@
-// types/index.ts
 export type TaskStatus = 'All' | 'Pending' | 'In Progress' | 'Completed';
 
 export type TaskPriority = 'All' | 'Low' | 'Medium' | 'High';
@@ -27,7 +26,6 @@ export interface TaskListProps {
   onDelete: (taskId: string) => void;
 }
 
-// types/index.ts
 export interface TaskItemProps {
   task: Task;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
