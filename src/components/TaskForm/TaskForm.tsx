@@ -1,7 +1,5 @@
 import { useState } from "react";
-// import type { Task } from "../../types";
 // import type { TaskStatus } from "../../types";
-// import type { TaskFormProps } from "../../types";
 import type { FormData, TaskFormProps } from "../../types";
 import type { Task } from "../../types";
 import { RetrieveSavedTasks } from "../../utils/taskUtils";
@@ -30,12 +28,12 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Address problem: if tasks are deleted and new task is added via form, deleted tasks reappear
         let newTasks = [...tasks];
-        console.log(newTasks);
+        // console.log(newTasks);
         let newId = [...formData.id];
         newTasks.push(formData);
-        localStorage.setItem("taskArray", JSON.stringify(newTasks));
+        // Moved logic to App.tsx to fix problem: after deleting an item, item would reappear in local storage when new item was added via form
+        // localStorage.setItem("taskArray", JSON.stringify(newTasks));
         setTasks(newTasks);
         localStorage.setItem("savedId", JSON.stringify(newId));
         setId(id + 1);

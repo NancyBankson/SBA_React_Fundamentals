@@ -14,6 +14,7 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>(RetrieveSavedTasks);
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(RetrieveSavedTasks);
 
+  // logic for Dashboard stats
   const [pendingStatus, setPendingStatus] = useState(0);
   const [inProgressStatus, setInProgressStatus] = useState(0);
   const [completedStatus, setCompletedStatus] = useState(0);
@@ -46,8 +47,6 @@ function App() {
     setHighPriority(highPriorityStats.length);
   }
 
-
-
   // Render list
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
@@ -78,8 +77,13 @@ function App() {
 
   // Add task form submit
   function onSubmit(task: Task) {
+    console.log(tasks);
     setTasks((prevTasks) => [...prevTasks, task]);
     setFilteredTasks((prevTasks) => [...prevTasks, task]);
+    console.log("n",tasks);
+    let newTasks = [...tasks];
+    newTasks.push(task);
+    localStorage.setItem("taskArray", JSON.stringify(newTasks));
   }
 
   // Filter status or priority

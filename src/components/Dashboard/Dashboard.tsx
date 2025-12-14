@@ -4,6 +4,7 @@ import type { DashboardProps, Task } from "../../types";
 
 export function Dashboard({pendingStatus, inProgressStatus, completedStatus, lowPriority, mediumPriority, highPriority}: DashboardProps) {
 
+    // This logic moved to App.tsx to fix problem with updates
     // const [tasks, setTasks] = useState<Task[]>(RetrieveSavedTasks);
     // const [pendingStatus, setPendingStatus] = useState(0);
     // const [inProgressStatus, setInProgressStatus] = useState(0);
@@ -69,7 +70,7 @@ export function Dashboard({pendingStatus, inProgressStatus, completedStatus, low
                             <p>{mediumPriority}</p>
                         </div>
                         <div className="stat">
-                            <label>Low</label>
+                            <label>High</label>
                             <p>{highPriority}</p>
                         </div>
                     </div>
