@@ -45,3 +45,12 @@ export interface TaskFilters {
 export interface TaskFormProps {
   onSubmit: (task: Task) => void;
 }
+
+export interface DashboardProps {
+  pendingStatus: number;
+  inProgressStatus: number;
+  completedStatus: number;
+  lowPriority: number;
+  mediumPriority: number;
+  highPriority: number;
+}
