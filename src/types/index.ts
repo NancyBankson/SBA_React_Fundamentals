@@ -28,7 +28,9 @@ export interface FormData {
 
 export interface TaskListProps {
   tasks: Task[];
+  onTitleChange: (taskId: string, newTitle: string) => void;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
+  onDescriptionChange: (taskId: string, newDescription: string) => void;
   onDelete: (taskId: string) => void;
   onAlphaChange: (alphaSort: string) => void;
   onDateChange: (dateSort: string) => void;
@@ -37,7 +39,9 @@ onClick: (itemId: number) => void;
 
 export interface TaskItemProps {
   task: Task;
+  onTitleChange: (taskId: string, newTitle: string) => void;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
+  onDescriptionChange: (taskId: string, newDescription: string) => void;
   onDelete: (taskId: string) => void;  
   onClick: (itemId: number) => void;
 }
@@ -55,6 +59,7 @@ export interface TaskFilters {
 export interface TaskFormProps {
   onSubmit: (task: Task) => void;
 }
+
 
 export interface DashboardProps {
   pendingStatus: number;

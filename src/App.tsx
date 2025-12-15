@@ -47,6 +47,18 @@ function App() {
   // Render list
   const newTasks: TaskListProps = {
     tasks: tasks as Task[],
+    onTitleChange: (taskId: string, newTitle: string) => {
+      const updatedTasks = tasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, title: newTitle };
+        }
+        return task;
+      });
+      let newTasks = [...updatedTasks];
+      localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
+    },
     onStatusChange: (taskId: string, newStatus: TaskStatus) => {
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
@@ -54,12 +66,22 @@ function App() {
         }
         return task;
       });
-
       let newTasks = [...updatedTasks];
       localStorage.setItem("taskArray", JSON.stringify(newTasks));
       setTasks(updatedTasks);
       setFilteredTasks(updatedTasks);
-
+    },
+    onDescriptionChange: (taskId: string, newDescription: string) => {
+      const updatedTasks = tasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, title: newDescription };
+        }
+        return task;
+      });
+      let newTasks = [...updatedTasks];
+      localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
     },
     onDelete: (taskId: string) => {
       const updatedTasks = tasks.filter((task) => task.id !== taskId);
@@ -162,7 +184,9 @@ function App() {
       />
       <TaskList
         tasks={filteredTasks}
+        onTitleChange={newTasks.onTitleChange}
         onStatusChange={newTasks.onStatusChange}
+        onDescriptionChange={newTasks.onDescriptionChange}
         onDelete={newTasks.onDelete}
         onAlphaChange={newTasks.onAlphaChange}
         onDateChange={newTasks.onDateChange}
