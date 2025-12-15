@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import type { DashboardProps, Task } from "../../types";
+import type { DashboardProps } from "../../types";
 // import { RetrieveSavedTasks } from "../../utils/taskUtils";
 
 export function Dashboard({pendingStatus, inProgressStatus, completedStatus, lowPriority, mediumPriority, highPriority}: DashboardProps) {

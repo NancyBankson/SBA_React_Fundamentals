@@ -20,10 +20,18 @@ export interface FormData {
   dueDate: string;
 }
 
+// export interface SortData {
+//   priorityToggle: string;
+//   dateToggle: string;
+//   alphaToggle: string;  
+// }
+
 export interface TaskListProps {
   tasks: Task[];
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDelete: (taskId: string) => void;
+  onAlphaChange: (alphaSort: string) => void;
+  onDateChange: (dateSort: string) => void;
 }
 
 export interface TaskItemProps {

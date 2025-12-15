@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import type { Task } from './types'
-import type { TaskStatus } from './types'
+import type { Task, TaskStatus, TaskListProps, TaskFilters } from './types'
 import { TaskList } from './components/TaskList/TaskList'
 import './App.css'
-import type { TaskListProps } from './types'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
-import type { TaskFilters } from './types'
 import { TaskForm } from './components/TaskForm/TaskForm'
 import { Dashboard } from './components/Dashboard/Dashboard'
 import { RetrieveSavedTasks } from './utils/taskUtils'
@@ -71,16 +68,45 @@ function App() {
       localStorage.setItem("taskArray", JSON.stringify(newTasks));
       setTasks(updatedTasks);
       setFilteredTasks(updatedTasks);
+    },
+    onAlphaChange: (sortAlpha: string) => {
+      if (sortAlpha === "A-Z") {
+        const sortedTasks = [...tasks].sort((a, b) => {
+          if (a.title > b.title) return 1;
+          if (a.title < b.title) return -1;
+          return 0;
+        });
+        setFilteredTasks(sortedTasks);
+      } else if (sortAlpha === "Z-A") {
+        const sortedTasks = [...tasks].sort((a, b) => {
+          if (a.title > b.title) return -1;
+          if (a.title < b.title) return 1;
+          return 0;
+        });
+        setFilteredTasks(sortedTasks);
+      }
+    },
 
+    onDateChange: (sortDate: string) => {
+      if (sortDate === "Date Ascending") {
+        const sortedTasks = [...tasks].sort((a, b) => {
+          return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+        });
+        setFilteredTasks(sortedTasks);
+      } else if (sortDate === "Date Descending") {
+        const sortedTasks = [...tasks].sort((a, b) => {
+          return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime();
+        });
+        setFilteredTasks(sortedTasks);
+      }
     }
   }
-
   // Add task form submit
   function onSubmit(task: Task) {
     console.log(tasks);
     setTasks((prevTasks) => [...prevTasks, task]);
     setFilteredTasks((prevTasks) => [...prevTasks, task]);
-    console.log("n",tasks);
+    console.log("n", tasks);
     let newTasks = [...tasks];
     newTasks.push(task);
     localStorage.setItem("taskArray", JSON.stringify(newTasks));
@@ -136,6 +162,8 @@ function App() {
         tasks={filteredTasks}
         onStatusChange={newTasks.onStatusChange}
         onDelete={newTasks.onDelete}
+        onAlphaChange={newTasks.onAlphaChange}
+        onDateChange={newTasks.onDateChange}
       />
     </>
   )
