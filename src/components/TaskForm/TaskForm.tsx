@@ -52,9 +52,9 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
         <div className="task-container">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Task title:</label>
-                <input id="title-input" type="text" name="title" value={formData.title} onChange={handleChange} placeholder="Enter title"></input>
+                <input id="title-input" type="text" name="title" value={formData.title} onChange={handleChange} placeholder="Enter title" required></input>
                 <label htmlFor="description">Task description:</label>
-                <input id="description-input" type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Enter description"></input>
+                <input id="description-input" type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Enter description" required></input>
                 <label htmlFor="status">Status:</label>
                 <select id="status-input" name="status" value={formData.status} onChange={handleChange}>
                     <option value="Pending">Pending</option>
