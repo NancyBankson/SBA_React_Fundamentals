@@ -86,7 +86,6 @@ function App() {
         setFilteredTasks(sortedTasks);
       }
     },
-
     onDateChange: (sortDate: string) => {
       if (sortDate === "Date Ascending") {
         const sortedTasks = [...tasks].sort((a, b) => {
@@ -99,6 +98,9 @@ function App() {
         });
         setFilteredTasks(sortedTasks);
       }
+    },
+    onClick: (itemId: number) => {
+      console.log(itemId);
     }
   }
   // Add task form submit
@@ -164,6 +166,7 @@ function App() {
         onDelete={newTasks.onDelete}
         onAlphaChange={newTasks.onAlphaChange}
         onDateChange={newTasks.onDateChange}
+        onClick={newTasks.onClick}
       />
     </>
   )

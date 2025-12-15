@@ -1,7 +1,7 @@
 import type { TaskListProps } from "../../types";
 import { TaskItem } from "./TaskItem";
 
-export function TaskList({ tasks, onStatusChange, onDelete, onAlphaChange, onDateChange}: TaskListProps) {
+export function TaskList({ tasks, onStatusChange, onDelete, onAlphaChange, onDateChange, onClick }: TaskListProps) {
 
     const handleAlphaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const alphaSort: string = event.target.value;
@@ -35,6 +35,7 @@ export function TaskList({ tasks, onStatusChange, onDelete, onAlphaChange, onDat
                         task={task}
                         onStatusChange={onStatusChange}
                         onDelete={onDelete}
+                        onClick={onClick}
                     />
                 ))}
             </div>

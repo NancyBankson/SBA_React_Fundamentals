@@ -32,12 +32,14 @@ export interface TaskListProps {
   onDelete: (taskId: string) => void;
   onAlphaChange: (alphaSort: string) => void;
   onDateChange: (dateSort: string) => void;
+onClick: (itemId: number) => void;
 }
 
 export interface TaskItemProps {
   task: Task;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
-  onDelete: (taskId: string) => void;
+  onDelete: (taskId: string) => void;  
+  onClick: (itemId: number) => void;
 }
 
 export interface TaskFilterProps {

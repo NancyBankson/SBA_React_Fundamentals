@@ -1,7 +1,7 @@
 import type { TaskItemProps } from "../../types";
 import type { TaskStatus } from "../../types";
 
-export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
+export function TaskItem({ task, onStatusChange, onDelete, onClick }: TaskItemProps) {
 
     const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const target = event.target as HTMLElement;
@@ -13,6 +13,12 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
         const target = event.target as HTMLElement;
         onDelete(target.id);
     }
+
+    const handleClick = (itemId: number) => {
+        const taskId: number = itemId;
+        onClick(taskId);
+    };
+
     return (
         <div key={task.id} className="task-container">
             <div className="title-row">
@@ -26,7 +32,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
             </div>
             <h2>{task.description}</h2>
             <h3><span>Priority: {task.priority}</span>  Due: {task.dueDate}</h3>
+            <button onClick={() => handleClick(parseInt(task.id))}>Edit</button>
         </div>
     )
-
 }
