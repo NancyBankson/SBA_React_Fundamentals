@@ -15,7 +15,7 @@ export function TaskList({ tasks, onTitleChange, onStatusChange, onDescriptionCh
 
     return (
         <>
-            <div>
+            <div id="sort-bar">
                 <label>Sort:</label>
                 <select name="dateToggle" onChange={handleDateChange}>
                     <option value="">By Date</option>

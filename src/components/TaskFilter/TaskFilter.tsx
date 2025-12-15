@@ -5,20 +5,6 @@ import type { TaskStatus } from "../../types";
 import type { TaskPriority } from "../../types";
 
 export function TaskFilter({ onSearchChange, onFilterChange }: TaskFilterProps) {
-    // const [filters, setFilters] = useState("");
-    //  This code caused an ifinite loop
-    // const [filters, setFilters] = useState<TaskFilters>({
-    //     status: "All",
-    //     priority: "All"
-    // });
-
-    // function handleFilterChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    //     if (event.target.id === "status-filter") {
-    //         const targetFilter = event.target.value as TaskStatus;
-    //         onFilterChange(targetFilter);
-    //     }
-    // }
-    // onFilterChange(filters);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         let searchTerm = event.target.value;
@@ -27,30 +13,33 @@ export function TaskFilter({ onSearchChange, onFilterChange }: TaskFilterProps) 
 
     return (
         <>
-            <div>
-                <search>
-                    <label htmlFor="search-task">Search tasks</label>
-                    <input type="search" id="search-task" onChange={handleChange}/>
-                </search>
+            <div id="filter-bar">
+                <div>
+                    <search>
+                        <label htmlFor="search-task">Search tasks</label>
+                        <input type="search" id="search-task" onChange={handleChange} />
+                    </search>
+                </div>
+                <div>
+                    <label>Status</label>
+                    <select id="status-filter" defaultValue={"All"} onChange={(e) => onFilterChange({ status: (e.target.value as TaskStatus) || undefined })}>
+                        <option value="All">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Priority</label>
+                    <select id="priority-filter" defaultValue={"All"} onChange={(e) => onFilterChange({ priority: (e.target.value as TaskPriority) || undefined })}>
+                        <option value="All">All Priorites</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label>Status</label>
-                <select id="status-filter" defaultValue={"All"} onChange={(e) => onFilterChange({ status : (e.target.value as TaskStatus) || undefined})}>
-                    <option value="All">All Statuses</option>
-                    <option value="Pending">Pending</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>
-            <div>
-                <label>Priority</label>
-                <select id="priority-filter" defaultValue={"All"} onChange={(e) => onFilterChange({ priority : (e.target.value as TaskPriority) || undefined})}>
-                    <option value="All">All Priorites</option>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                </select>
-            </div>
+
         </>
     )
 }

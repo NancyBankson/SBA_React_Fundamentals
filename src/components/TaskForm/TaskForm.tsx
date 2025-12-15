@@ -53,15 +53,15 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Task title:</label>
                 <input id="title-input" type="text" name="title" value={formData.title} onChange={handleChange} placeholder="Enter title"></input>
-                <label htmlFor="description">Task description</label>
+                <label htmlFor="description">Task description:</label>
                 <input id="description-input" type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Enter description"></input>
-                <label htmlFor="status">Status</label>
+                <label htmlFor="status">Status:</label>
                 <select id="status-input" name="status" value={formData.status} onChange={handleChange}>
                     <option value="Pending">Pending</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Completed">Completed</option>
                 </select>
-                <label htmlFor="priority">Priority</label>
+                <label htmlFor="priority">Priority:</label>
                 <select id="priority-input" name="priority" value={formData.priority} onChange={handleChange}>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>

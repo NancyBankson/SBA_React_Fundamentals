@@ -16,7 +16,7 @@ export function TaskItem({ task, onTitleChange, onStatusChange, onDescriptionCha
         onStatusChange(target.id, newStatus)
     }
 
-     const handleDescriptionChange = (itemId: string, event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = (itemId: string, event: React.ChangeEvent<HTMLInputElement>) => {
         const newDescription: string = event.target.value;
         onDescriptionChange(itemId, newDescription)
     }
@@ -40,16 +40,19 @@ export function TaskItem({ task, onTitleChange, onStatusChange, onDescriptionCha
         <div key={task.id} className="task-container">
             <div className="title-row">
                 {isVisible && (<h1>{task.title}</h1>)}
-                {!isVisible && (<input type="text" name="title" placeholder={task.title} onChange={(event) => handleTitleChange(task.id, event)}></input>)}
-                <select id={task.id} defaultValue={task.status} onChange={handleStatusChange}>
-                    <option value="Pending">Pending</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                </select>
-                <p id={task.id} className="delete-text" onClick={handleDelete}>Delete</p>
+                {!isVisible && (<input className="edit-input" type="text" name="title" placeholder={task.title} onChange={(event) => handleTitleChange(task.id, event)}></input>)}
+                <div id="status-delete">
+                    <select id={task.id} defaultValue={task.status} onChange={handleStatusChange}>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <p id={task.id} className="delete-text" onClick={handleDelete}>Delete</p>
+                </div>
             </div>
+            <h2>Description:</h2>
             {isVisible && (<h2>{task.description}</h2>)}
-            {!isVisible && (<input type="text" name="description" placeholder={task.description} onChange={(event) => handleDescriptionChange(task.id, event)}></input>)}
+            {!isVisible && (<input className="edit-input" type="text" name="description" placeholder={task.description} onChange={(event) => handleDescriptionChange(task.id, event)}></input>)}
             <h3><span>Priority: {task.priority}</span>  Due: {task.dueDate}</h3>
             <button onClick={() => handleClick(parseInt(task.id))}>Edit</button>
             {!isVisible && (<button onClick={handleSave}>Save</button>)}

@@ -74,7 +74,7 @@ function App() {
     onDescriptionChange: (taskId: string, newDescription: string) => {
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
-          return { ...task, title: newDescription };
+          return { ...task, description: newDescription };
         }
         return task;
       });
@@ -166,7 +166,7 @@ function App() {
   return (
     <>
       <img src="/jigglypuff.jpg" />
-      <h3>Jigglypuff says "I'm still working on this one"</h3>
+      <h3 id="greeting">Jigglypuff says "Get some work done with my task manager!"</h3>
       <Dashboard
         pendingStatus={pendingStatus}
         inProgressStatus={inProgressStatus}
