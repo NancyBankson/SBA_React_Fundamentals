@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# SBA 9 React Task Dashboard Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The purpose of this assignment was to create a Task Management Dashboard Application.  It required understanding of React fundamentals including state management, form handling, component composition, and TypeScript integration.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+Implementation of this project required: 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Type Definitions (types/index.ts)
 
-## Expanding the ESLint configuration
+Define TypeScript interfaces for:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Task data structure
+- Component props
+- Form data
+- Filter options
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Task Management Components
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. TaskList Component:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Implement list rendering with proper key management
+- Handle task status updates
+- Implement task addition
+- Implement task deletion
+- Add sorting functionality
+- Add a search bar to search for tasks
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. TaskForm Component:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Create a controlled form for adding/editing tasks
+- Implement form validation
+- Handle form submission
+- Show validation feedback
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. TaskFilter Component:
+
+- Implement filtering by status and priority
+- Add search functionality
+- Show active filter indicators
+
+4. Dashboard Component:
+
+- Compose all components into a cohesive dashboard
+- Implement responsive layout
+- Add task statistics
+- Handle component communication
+
+5. Utility Functions
+
+- Implement task filtering logic
+- Add sorting functions
+- Create validation helpers
+- Add date formatting utilities
+
+6. Data Persistence
+
+- Add localStorage integration
+- Implement data export/import
+
+## Tools
+
+- HTML
+- CSS
+- JavaScript
+- TypeScript
+- React
+- Vite
+
+To Run this React application, follow the following steps in the terminal:
+npm create vite@latest
+cd task-dashboard
+npm install
+npm run dev
+
+## Reflection
+
+To say this assignment was a challenge is an extreme understatement.  I believe I have spent at least 40 hours working on this application.  One of the things I find difficult is making the application modular.  Sometimes it is difficult to figure out where it is best to put the logic.  For example, I first added the stats logic to the Dashboard component, but then I realized that it did not reflect the latest changes it needed to work in conjunction with the task state on the main tsx page.  Figuring out things like that required a lot of trial and error because this was our first real use of React.  It made the assignment extremely time consuming.  It took me 3 hours just to configure the sorting.  I also spent a lot of of time just thinking.  At first, I could not think of a way to implement the edit functions since data can't flow back to the components, where the input form is located.  I finally decided to use the TaskItem component with hidden inputs.  It would have been nice to see an example of how to implement edits.  This assignment taught me a lot.  Hopefully, I will be able to implement the things I've learned much faster in the future.
