@@ -19,7 +19,7 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = event.target; // Destructure name and value
-
+        
         setFormData(prevFormData => ({
             ...prevFormData, // Spread existing state
             [name]: value     // Update changed field using computed property name
@@ -29,13 +29,16 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         let newTasks = [...tasks];
-        // console.log(newTasks);
         let newId = [...formData.id];
         newTasks.push(formData);
         // Moved logic to App.tsx to fix problem: after deleting an item, item would reappear in local storage when new item was added via form
         // localStorage.setItem("taskArray", JSON.stringify(newTasks));
         setTasks(newTasks);
-        localStorage.setItem("savedId", JSON.stringify(newId));
+        try {
+            localStorage.setItem("savedId", JSON.stringify(newId));
+        } catch (error) {
+            console.error("Error setting local storage", error);
+        }
         setId(id + 1);
         setFormData({
             id: (id + 1).toString(),

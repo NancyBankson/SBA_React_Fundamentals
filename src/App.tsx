@@ -55,7 +55,11 @@ function App() {
         return task;
       });
       let newTasks = [...updatedTasks];
-      localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      try {
+         localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      } catch (error) {
+        console.error("Error setting local storage", error);
+      }     
       setTasks(updatedTasks);
       setFilteredTasks(updatedTasks);
     },
@@ -127,10 +131,8 @@ function App() {
   }
   // Add task form submit
   function onSubmit(task: Task) {
-    console.log(tasks);
     setTasks((prevTasks) => [...prevTasks, task]);
     setFilteredTasks((prevTasks) => [...prevTasks, task]);
-    console.log("n", tasks);
     let newTasks = [...tasks];
     newTasks.push(task);
     localStorage.setItem("taskArray", JSON.stringify(newTasks));
