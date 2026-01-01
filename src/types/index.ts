@@ -31,10 +31,12 @@ export interface TaskListProps {
   onTitleChange: (taskId: string, newTitle: string) => void;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDescriptionChange: (taskId: string, newDescription: string) => void;
+  onPriorityChange: (taskId: string, newPriority: TaskPriority) => void;
+  onDateUpdate: (taskId: string, newDate: string) => void;
   onDelete: (taskId: string) => void;
   onAlphaChange: (alphaSort: string) => void;
   onDateChange: (dateSort: string) => void;
-onClick: (itemId: number) => void;
+  onClick: (itemId: number) => void;
 }
 
 export interface TaskItemProps {
@@ -42,7 +44,9 @@ export interface TaskItemProps {
   onTitleChange: (taskId: string, newTitle: string) => void;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDescriptionChange: (taskId: string, newDescription: string) => void;
-  onDelete: (taskId: string) => void;  
+  onPriorityChange: (taskId: string, newPriority: TaskPriority) => void;
+  onDateUpdate: (taskId: string, newDate: string) => void;
+  onDelete: (taskId: string) => void;
   onClick: (itemId: number) => void;
 }
 
@@ -53,7 +57,7 @@ export interface TaskFilterProps {
 
 export interface TaskFilters {
   status?: TaskStatus;
-    priority?: TaskPriority;
+  priority?: TaskPriority;
 }
 
 export interface TaskFormProps {

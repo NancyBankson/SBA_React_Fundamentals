@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Task, TaskStatus, TaskListProps, TaskFilters } from './types'
+import type { Task, TaskStatus, TaskListProps, TaskFilters, TaskPriority } from './types'
 import { TaskList } from './components/TaskList/TaskList'
 import './App.css'
 import { TaskFilter } from './components/TaskFilter/TaskFilter'
@@ -79,6 +79,30 @@ function App() {
       const updatedTasks = tasks.map(task => {
         if (task.id === taskId) {
           return { ...task, description: newDescription };
+        }
+        return task;
+      });
+      let newTasks = [...updatedTasks];
+      localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
+    },
+    onPriorityChange: (taskId: string, newPriority: TaskPriority) => {
+      const updatedTasks = tasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, priority: newPriority };
+        }
+        return task;
+      });
+      let newTasks = [...updatedTasks];
+      localStorage.setItem("taskArray", JSON.stringify(newTasks));
+      setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
+    },
+     onDateUpdate: (taskId: string, newDate: string) => {
+      const updatedTasks = tasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, dueDate: newDate };
         }
         return task;
       });
@@ -189,6 +213,8 @@ function App() {
         onTitleChange={newTasks.onTitleChange}
         onStatusChange={newTasks.onStatusChange}
         onDescriptionChange={newTasks.onDescriptionChange}
+        onPriorityChange={newTasks.onPriorityChange}
+        onDateUpdate={newTasks.onDateUpdate}
         onDelete={newTasks.onDelete}
         onAlphaChange={newTasks.onAlphaChange}
         onDateChange={newTasks.onDateChange}
